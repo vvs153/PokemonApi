@@ -13,14 +13,14 @@ public class PokemonList {
    private Integer count;
    private String next;
    private String previous;
-   private List<PokemonListResult> results;
+   private List<PokemonListItem> results;
 
 
 }
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class PokemonListResult{
+class PokemonListItem{
    private String name;
    private String url;
 }

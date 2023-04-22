@@ -15,8 +15,8 @@ public class PokemonApiService {
         this.pokemonApiNetworkRepository = pokemonApiNetworkRepository;
     }
 
-   public List<PokemonListResult> getPokemonListResult(){
-        List<PokemonListResult> results = new ArrayList<>();
+   public List<PokemonListItem> getPokemonListResult(){
+        List<PokemonListItem> results = new ArrayList<>();
         PokemonList result;
         int limit = 100;
         int offset = 0;

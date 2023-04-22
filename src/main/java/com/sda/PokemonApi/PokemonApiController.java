@@ -3,7 +3,6 @@ package com.sda.PokemonApi;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -11,16 +10,18 @@ import java.util.List;
 @RequestMapping("/pokemon")
 public class PokemonApiController {
 
-    private final RestTemplate restTemplate;
 
-    public PokemonApiController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+
+   private final PokemonApiService pokemonApiService;
+
+    public PokemonApiController(PokemonApiService pokemonApiService) {
+        this.pokemonApiService = pokemonApiService;
     }
 
 
     @GetMapping("/list")
-    public List<PokemonList> getPokemonListResult() {
-      return PokemonApiService.getPokemonListResult();
+    public List<PokemonListItem> getPokemonListResult() {
+      return pokemonApiService.getPokemonListResult();
 
     }
 
