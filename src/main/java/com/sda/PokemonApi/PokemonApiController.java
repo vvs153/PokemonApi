@@ -20,7 +20,7 @@ public class PokemonApiController {
 
 
     @GetMapping("/list")
-    public List<PokemonListItem> getPokemonListResult() {
+    public List<PokemonItemEntity> getPokemonListResult() {
       return pokemonApiService.getPokemonListResult();
 
     }

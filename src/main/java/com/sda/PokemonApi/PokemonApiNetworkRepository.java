@@ -15,8 +15,8 @@ public class PokemonApiNetworkRepository {
     }
 
 
-    PokemonList fetchPokemonListResult(int limit, int offeset) {
-        String fullUrl = String.format(url, limit, offeset);
+    PokemonList fetchPokemonListResult(int limit, int offset) {
+        String fullUrl = String.format(url, limit, offset);
         PokemonList result = restTemplate.getForObject(fullUrl, PokemonList.class);
         return result;
     }

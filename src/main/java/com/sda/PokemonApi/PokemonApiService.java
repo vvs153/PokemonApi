@@ -9,13 +9,17 @@ import java.util.List;
 public class PokemonApiService {
 
     private final PokemonApiNetworkRepository pokemonApiNetworkRepository;
+    private final PokemonApiItemRepository pokemonApiItemRepository;
+    private final PokemonListItemMapper pokemonListItemMapper;
 
-
-    public PokemonApiService(PokemonApiNetworkRepository pokemonApiNetworkRepository) {
+    public PokemonApiService(PokemonApiNetworkRepository pokemonApiNetworkRepository, PokemonApiItemRepository pokemonApiItemRepository, PokemonListItemMapper pokemonListItemMapper) {
         this.pokemonApiNetworkRepository = pokemonApiNetworkRepository;
+        this.pokemonApiItemRepository = pokemonApiItemRepository;
+        this.pokemonListItemMapper = pokemonListItemMapper;
     }
 
-   public List<PokemonListItem> getPokemonListResult(){
+
+    public List<PokemonItemEntity> getPokemonListResult(){
         List<PokemonListItem> results = new ArrayList<>();
         PokemonList result;
         int limit = 100;
@@ -25,6 +29,8 @@ public class PokemonApiService {
             results.addAll(result.getResults());
             offset +=limit;
         } while (result.getNext() != null);
-        return results;
+        List<PokemonItemEntity> pokemonItemEntityList =
+                results.stream().map(pokemonListItemMapper::toEntity).toList();
+        return pokemonApiItemRepository.saveAll(pokemonItemEntityList);
     }
 }
