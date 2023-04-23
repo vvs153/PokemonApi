@@ -15,15 +15,12 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class PokemonItemEntity {
+
+
+
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
-
    private String name;
-   private String url;
 
-   public PokemonItemEntity(String name, String url) {
-      this.name=name;
-      this.url=url;
-   }
+
 }
