@@ -7,14 +7,20 @@ import java.util.List;
 @Service
 public class PokemonApiService {
     private final FetchPokemonListUseCase fetchPokemonListUseCase;
+    private final PokemonApiItemRepository pokemonApiItemRepository;
 
-    public PokemonApiService(FetchPokemonListUseCase fetchPokemonListUseCase) {
+    public PokemonApiService(FetchPokemonListUseCase fetchPokemonListUseCase, PokemonApiItemRepository pokemonApiItemRepository) {
         this.fetchPokemonListUseCase = fetchPokemonListUseCase;
+        this.pokemonApiItemRepository = pokemonApiItemRepository;
     }
 
 
     public List<PokemonItemEntity> getPokemonListResult(){
+        if(pokemonApiItemRepository.count()!=0){
+           return pokemonApiItemRepository.findAll();
+        }else{
+            return fetchPokemonListUseCase.execute();
+        }
 
-        return fetchPokemonListUseCase.execute();
     }
 }
