@@ -23,5 +23,7 @@ public class PokemonItemEntity {
    private String url;
 
    public PokemonItemEntity(String name, String url) {
+      this.name=name;
+      this.url=url;
    }
 }
