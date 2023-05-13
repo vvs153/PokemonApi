@@ -28,7 +28,6 @@ public class FetchPokemonListUseCase {
             if (_results != null) {
                 results.addAll(result.getResults());
             }
-            results.addAll(result.getResults());
             offset +=limit;
         } while (result.getNext() != null);
         List<PokemonItemEntity> pokemonItemEntityList =
