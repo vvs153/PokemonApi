@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PokemonSpritesResult {
-    private PokemonOther others;
+    private PokemonOther other;
 
 }
 @Data

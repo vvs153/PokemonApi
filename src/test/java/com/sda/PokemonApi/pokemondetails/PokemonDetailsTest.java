@@ -26,6 +26,18 @@ class PokemonDetailsTest {
 
 
         assertEquals(2, result.getAbilities().size());
+        assertFalse(result.getAbilities().get(0).isHidden());
+        assertEquals(1, result.getAbilities().get(0).getSlot());
+        assertEquals("torrent", result.getAbilities().get(0).getAbility().getName());
+        assertEquals("https://pokeapi.co/api/v2/ability/67/", result.getAbilities().get(0).getAbility().getUrl());
         assertEquals(855, result.getWeight());
+        assertEquals(1, result.getTypes().get(0).getSlot());
+        assertEquals("water", result.getTypes().get(0).getType().getName());
+        assertEquals("https://pokeapi.co/api/v2/type/11/", result.getTypes().get(0).getType().getUrl());
+        assertEquals(16, result.getHeight());
+        assertEquals("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+                result.getSprites().getOther().getOfficialArtwork().getFrontDefault());
+        assertEquals("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/9.png",
+                result.getSprites().getOther().getOfficialArtwork().getFrontShiny());
     }
 }

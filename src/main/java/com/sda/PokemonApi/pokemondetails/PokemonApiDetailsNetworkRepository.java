@@ -12,8 +12,8 @@ public class PokemonApiDetailsNetworkRepository {
         this.url = url;
         this.restTemplate = restTemplate;
     }
-    PokemonDetails fetchPokemonDetailsResult(int limit) {
-        String fullUrl = String.format(url, limit );
+    PokemonDetails fetchPokemonDetailsResult(String pokemonName) {
+        String fullUrl = String.format(url, pokemonName );
         PokemonDetails result = restTemplate.getForObject(fullUrl, PokemonDetails.class);
         return result;
     }
