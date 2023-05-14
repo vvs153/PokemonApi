@@ -15,7 +15,7 @@ public class PokemonDetailsController {
     }
 
     @GetMapping("/{pokemonName}")
-    String getPokemonDetails(@PathVariable String pokemonName) {
+    PokemonDetailsEntity getPokemonDetails(@PathVariable String pokemonName) {
         return pokemonDetailsService.getPokemonDetailsUrl(pokemonName);
     }
     @ExceptionHandler(NoPokemonFoundException.class)

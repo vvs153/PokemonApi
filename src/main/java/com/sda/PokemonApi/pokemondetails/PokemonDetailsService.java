@@ -3,25 +3,28 @@ package com.sda.PokemonApi.pokemondetails;
 import com.sda.PokemonApi.exception.NoPokemonFoundException;
 import com.sda.PokemonApi.PokemonApiItemRepository;
 import com.sda.PokemonApi.PokemonItemEntity;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PokemonDetailsService{
     private final PokemonApiItemRepository pokemonApiItemRepository;
-    private final String url;
+    private final PokemonApiDetailsNetworkRepository pokemonApiDetailsNetworkRepository;
+    private final PokemonDetailsMapper pokemonDetailsMapper;
 
-    public PokemonDetailsService(PokemonApiItemRepository pokemonApiItemRepository,  @Value("${pokeapi.details.url}") String url) {
+    public PokemonDetailsService(PokemonApiItemRepository pokemonApiItemRepository, PokemonApiDetailsNetworkRepository pokemonApiDetailsNetworkRepository, PokemonDetailsMapper pokemonDetailsMapper) {
         this.pokemonApiItemRepository = pokemonApiItemRepository;
-        this.url = url;
+        this.pokemonApiDetailsNetworkRepository = pokemonApiDetailsNetworkRepository;
+        this.pokemonDetailsMapper = pokemonDetailsMapper;
     }
-    String getPokemonDetailsUrl(String pokemonName) {
+
+
+    PokemonDetailsEntity getPokemonDetailsUrl(String pokemonName) {
         PokemonItemEntity pokemonItemEntity =
                 pokemonApiItemRepository.findByName(pokemonName)
                         .orElseThrow(()->new NoPokemonFoundException(pokemonName));
-        return String.format(url, pokemonItemEntity.getId());
+        PokemonDetails pokemonDetails =
+                pokemonApiDetailsNetworkRepository.fetchPokemonDetailsResult(pokemonItemEntity.getId());
+        return pokemonDetailsMapper.toEntity(pokemonDetails);
     }
 
 
