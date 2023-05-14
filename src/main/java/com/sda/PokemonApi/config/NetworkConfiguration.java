@@ -1,4 +1,4 @@
-package com.sda.PokemonApi;
+package com.sda.PokemonApi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

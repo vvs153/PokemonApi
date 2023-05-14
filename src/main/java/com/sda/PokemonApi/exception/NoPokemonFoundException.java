@@ -1,4 +1,4 @@
-package com.sda.PokemonApi;
+package com.sda.PokemonApi.exception;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 

@@ -1,10 +1,12 @@
 package com.sda.PokemonApi.pokemondetails;
 
-import com.sda.PokemonApi.NoPokemonFoundException;
+import com.sda.PokemonApi.exception.NoPokemonFoundException;
 import com.sda.PokemonApi.PokemonApiItemRepository;
 import com.sda.PokemonApi.PokemonItemEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PokemonDetailsService{
@@ -21,5 +23,6 @@ public class PokemonDetailsService{
                         .orElseThrow(()->new NoPokemonFoundException(pokemonName));
         return String.format(url, pokemonItemEntity.getId());
     }
+
 
 }
