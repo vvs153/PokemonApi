@@ -4,9 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
-interface PokemonApiItemRepository extends JpaRepository<PokemonItemEntity, Long> {
-
+public interface PokemonApiItemRepository extends JpaRepository<PokemonItemEntity, Long> {
+    Optional<PokemonItemEntity> findByName(String name);
 
 }
