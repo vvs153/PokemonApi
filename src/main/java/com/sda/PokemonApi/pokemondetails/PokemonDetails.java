@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PokemonDetails {
+    private String name;
     private List<PokemonAbilityWrapperResult> abilities;
     private Integer height;
     private Integer weight;

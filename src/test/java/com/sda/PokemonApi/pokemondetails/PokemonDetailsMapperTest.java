@@ -17,6 +17,7 @@ class PokemonDetailsMapperTest {
     void given_empty_pokemon_details_from_network_repository_when_map_to_entity_then_pokemon_details_entity_should_be_returned(){
       PokemonDetailsMapper pokemonDetailsMapper = new PokemonDetailsMapper();
       PokemonDetails pokemonDetails = new PokemonDetails(
+              null,
             null,
               200,
               20,
@@ -28,6 +29,7 @@ class PokemonDetailsMapperTest {
 
     assertEquals(200, result.getHeight());
     assertEquals(20, result.getWeight());
+    assertNull(result.getName());
     assertNull(result.getImage());
     assertNull(result.getAbilities());
     assertNull(result.getTypes());
@@ -65,6 +67,7 @@ class PokemonDetailsMapperTest {
             )
     );
     PokemonDetails pokemonDetails = new PokemonDetails(
+            "kek",
             abilities,
             200,
             20,
@@ -74,6 +77,7 @@ class PokemonDetailsMapperTest {
 
     PokemonDetailsEntity result = pokemonDetailsMapper.toEntity(pokemonDetails);
 
+    assertEquals("kek",result.getName());
     assertEquals(200, result.getHeight());
     assertEquals(20, result.getWeight());
     assertEquals("image1", result.getImage());

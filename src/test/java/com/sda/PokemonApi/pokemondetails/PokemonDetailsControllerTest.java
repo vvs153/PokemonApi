@@ -45,8 +45,12 @@ class PokemonDetailsControllerTest {
                         MockMvcRequestBuilders.get("/pokemon/details/"+pokemonName)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
+
                 .andExpect(
                         MockMvcResultMatchers.jsonPath("$.height", equalTo(7))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$.name", equalTo("bulbasaur"))
                 )
                 .andExpect(
                         MockMvcResultMatchers.jsonPath("$.weight", equalTo(69))
@@ -106,6 +110,12 @@ class PokemonDetailsControllerTest {
                         MockMvcResultMatchers.jsonPath("$[1].height", equalTo(4))
                 )
                 .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].name", equalTo("bulbasaur"))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[1].name", equalTo("pikachu"))
+                )
+                .andExpect(
                         MockMvcResultMatchers.jsonPath("$[0].weight", equalTo(69))
                 )
                 .andExpect(
@@ -144,6 +154,9 @@ class PokemonDetailsControllerTest {
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].types", hasSize(2)))
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].name", equalTo("bulbasaur"))
+                )
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[0]", equalTo("grass")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[1]", equalTo("poison")));
     }

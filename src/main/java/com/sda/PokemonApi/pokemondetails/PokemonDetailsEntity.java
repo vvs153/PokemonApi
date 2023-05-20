@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 
 public class PokemonDetailsEntity {
-
+    private String name;
     private Integer height;
     private Integer weight;
 

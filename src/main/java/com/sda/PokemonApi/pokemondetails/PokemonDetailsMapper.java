@@ -27,6 +27,7 @@ public class PokemonDetailsMapper {
                 .map(item -> item.getType().getName())
                 .toList();}
         return new PokemonDetailsEntity(
+                pokemonDetails.getName(),
                 pokemonDetails.getHeight(),
                 pokemonDetails.getWeight(),
                 image,
