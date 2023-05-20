@@ -6,6 +6,7 @@ import com.sda.PokemonApi.PokemonItemEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PokemonDetailsService{
@@ -36,7 +37,9 @@ public class PokemonDetailsService{
               } catch(NoPokemonFoundException e){
                     return null;
               }
-      }).toList();
+      })
+              .filter(Objects::nonNull)
+              .toList();
 
     }
 
