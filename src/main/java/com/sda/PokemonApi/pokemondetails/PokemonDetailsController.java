@@ -22,7 +22,7 @@ public class PokemonDetailsController {
     }
 
     @GetMapping
-    List<PokemonDetailsEntity> getPokemonDetails(List<String> pokemonNames){
+    List<PokemonDetailsEntity> getPokemonDetails(@RequestParam List<String> pokemonNames){
         return pokemonDetailsService.getPokemonDetailsUrl(pokemonNames);
     }
     @ExceptionHandler(NoPokemonFoundException.class)

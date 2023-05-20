@@ -4,6 +4,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 @Service
 @EnableScheduling
 public class PokemonLoadingService {
@@ -20,7 +22,8 @@ private final PokemonApiNetworkRepository pokemonApiNetworkRepository;
     }
 
 
-    @Scheduled(fixedRate = 3600000,initialDelay = 100)
+    @Scheduled(fixedRate = 3600000,initialDelay = 3600000)
+    @PostConstruct
     void loadPokemonList() {
 
             long repoCount = pokemonApiItemRepository.count();

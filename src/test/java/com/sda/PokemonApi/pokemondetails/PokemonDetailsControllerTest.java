@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
@@ -79,4 +82,70 @@ class PokemonDetailsControllerTest {
                         "$",equalTo(String.format("Can't find %s", pokemonName))
                 ));
     }
+
+    @Test
+    void given_name_of_existing_pokemons_when_GET_pokemon_details_then_pokemon_details_should_be_returned() throws Exception {
+        String queryParam = "?pokemonNames=Bulbasaur&pokemonNames=Pikachu";
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/pokemon/details"+queryParam)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$", hasSize(2))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].types", hasSize(2))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[1].types", hasSize(1))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].height", equalTo(7))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[1].height", equalTo(4))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].weight", equalTo(69))
+                )
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[1].weight", equalTo(60))
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[0]", equalTo("grass")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[1]", equalTo("poison")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].types[0]", equalTo("electric")))
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+    }
+
+    @Test
+    void given_name_of_not_existing_pokemons_when_GET_pokemon_details_then_404_not_found_should_be_returned() throws Exception {
+        String queryParam = "?pokemonNames=Bulbasr&pokemonNames=Pikimen";
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/pokemon/details"+queryParam)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+
+
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$", hasSize(0))
+                );
+    }
+    @Test
+    void given_names_of_existing_and_not_existing_pokemons_when_GET_pokemon_details_then_details_of_existing_pokemon_should_be_returned() throws Exception {
+        //given
+        String queryParam = "?pokemonNames=Bulbasaur&pokemonNames=p";
+
+        //when
+        //then
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/pokemon/details" + queryParam)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].types", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[0]", equalTo("grass")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].types[1]", equalTo("poison")));
+    }
+
 }
