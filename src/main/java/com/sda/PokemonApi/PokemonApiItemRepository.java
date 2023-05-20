@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Component
 public interface PokemonApiItemRepository extends JpaRepository<PokemonItemEntity, Long> {
-    Optional<PokemonItemEntity> findByName(String name);
+    Optional<PokemonItemEntity> findByNameIgnoreCase(String name);
 
 }

@@ -5,6 +5,8 @@ import com.sda.PokemonApi.PokemonApiItemRepository;
 import com.sda.PokemonApi.PokemonItemEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PokemonDetailsService{
     private final PokemonApiItemRepository pokemonApiItemRepository;
@@ -20,11 +22,22 @@ public class PokemonDetailsService{
 
     PokemonDetailsEntity getPokemonDetailsUrl(String pokemonName) {
         PokemonItemEntity pokemonItemEntity =
-                pokemonApiItemRepository.findByName(pokemonName)
+                pokemonApiItemRepository.findByNameIgnoreCase(pokemonName)
                         .orElseThrow(()->new NoPokemonFoundException(pokemonName));
         PokemonDetails pokemonDetails =
                 pokemonApiDetailsNetworkRepository.fetchPokemonDetailsResult(pokemonItemEntity.getId());
         return pokemonDetailsMapper.toEntity(pokemonDetails);
+    }
+
+    List<PokemonDetailsEntity> getPokemonDetailsUrl(List<String> pokemonNames){
+      return   pokemonNames.stream().map(pokemonName ->{
+          try {
+                  return getPokemonDetailsUrl(pokemonName);
+              } catch(NoPokemonFoundException e){
+                    return null;
+              }
+      }).toList();
+
     }
 
 
