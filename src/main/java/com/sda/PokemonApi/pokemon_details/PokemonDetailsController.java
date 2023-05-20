@@ -1,4 +1,4 @@
-package com.sda.PokemonApi.pokemondetails;
+package com.sda.PokemonApi.pokemon_details;
 
 import com.sda.PokemonApi.exception.NoPokemonFoundException;
 import org.springframework.http.HttpStatus;

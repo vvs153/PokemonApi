@@ -1,9 +1,6 @@
-package com.sda.PokemonApi.pokemondetails;
+package com.sda.PokemonApi.pokemon_details;
 
-import com.sda.PokemonApi.PokemonApiItemRepository;
-import com.sda.PokemonApi.PokemonItemEntity;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.sda.PokemonApi.pokemondetails;
+package com.sda.PokemonApi.pokemon_details;
 
-import com.sda.PokemonApi.PokemonList;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
