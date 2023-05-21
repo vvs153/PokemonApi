@@ -15,12 +15,11 @@ import java.net.URL;
 
 @Component("pokeapilist")
 public class PokemonApiListHealthcheck implements HealthContributor, HealthIndicator {
-    private final RestTemplate restTemplate;
+
     private final String url;
 
-    public PokemonApiListHealthcheck(RestTemplate restTemplate, @Value("${pokeapi.url}") String url) {
-        this.restTemplate = restTemplate;
-        this.url = "https://pokeapiu.co/api/v2/pokemon?limit=%d&offset=%d";
+    public PokemonApiListHealthcheck( @Value("${pokeapi.url}") String url) {
+        this.url = url;
     }
 
     @Override

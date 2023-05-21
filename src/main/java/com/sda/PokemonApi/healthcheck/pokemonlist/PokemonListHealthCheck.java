@@ -1,5 +1,6 @@
-package com.sda.PokemonApi.healthcheck;
+package com.sda.PokemonApi.healthcheck.pokemonlist;
 
+import com.sda.PokemonApi.healthcheck.PokemonApiListHealthcheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.CompositeHealthContributor;
 import org.springframework.boot.actuate.health.HealthContributor;

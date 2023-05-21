@@ -1,6 +1,7 @@
-package com.sda.PokemonApi.healthcheck;
+package com.sda.PokemonApi.healthcheck.pokemon_details;
 
-import com.sda.PokemonApi.pokemon_details.PokemonDetails;
+import com.sda.PokemonApi.healthcheck.PokemonApiListHealthcheck;
+import com.sda.PokemonApi.healthcheck.pokemon_details.PokemonDetailsDatabaseHealthCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.CompositeHealthContributor;
 import org.springframework.boot.actuate.health.HealthContributor;
@@ -16,8 +17,9 @@ public class PokemonDetailsHealthCheck implements CompositeHealthContributor {
     private final Map<String, HealthContributor> contributorMap = new LinkedHashMap<>();
 
     @Autowired
-    public PokemonDetailsHealthCheck(PokemonDetailsDatabaseHealthCheck pokemonDetailsDatabaseHealthCheck) {
+    public PokemonDetailsHealthCheck(PokemonDetailsDatabaseHealthCheck pokemonDetailsDatabaseHealthCheck, PokemonApiListHealthcheck pokemonApiListHealthcheck) {
         contributorMap.put("pokemondetailsdatabase", pokemonDetailsDatabaseHealthCheck);
+        contributorMap.put("pokeapilist", pokemonApiListHealthcheck);
     }
     @Override
     public Iterator<NamedContributor<HealthContributor>> iterator() {
