@@ -16,8 +16,9 @@ public class PokemonListHealthCheck implements CompositeHealthContributor {
     private final Map<String, HealthContributor> contributorMap = new LinkedHashMap<>();
 
     @Autowired
-    public PokemonListHealthCheck(PokemonDatabaseHealthCheck pokemonListDatabaseHealthCheck) {
+    public PokemonListHealthCheck(PokemonDatabaseHealthCheck pokemonListDatabaseHealthCheck, PokemonApiListHealthcheck pokemonApiListHealthcheck) {
         contributorMap.put("pokemonlistdatabase", pokemonListDatabaseHealthCheck);
+        contributorMap.put("pokeapilist", pokemonApiListHealthcheck);
     }
 
     @Override
